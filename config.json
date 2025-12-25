@@ -1,0 +1,14 @@
+{
+  "$schema": "./schema.json",
+  "font-size": 16,
+  "window-theme": "auto",
+  "dark": {
+    "theme": "Broadcast",
+    "background-image": "/Users/alicemoore/Downloads/ghostty-background.jpg",
+    "background-image-fit": "cover",
+    "background-image-opacity": 0.15
+  },
+  "light": {
+    "theme": "Belafonte Day"
+  }
+}

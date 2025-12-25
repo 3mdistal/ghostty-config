@@ -1,0 +1,996 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/alicemoore/ghostty-config/schema.json",
+  "title": "Ghostty Configuration",
+  "description": "JSON schema for Ghostty terminal configuration with light/dark mode support",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON schema reference"
+    },
+    "dark": {
+      "$ref": "#/definitions/themeConfig",
+      "description": "Configuration options applied only in dark mode"
+    },
+    "light": {
+      "$ref": "#/definitions/themeConfig",
+      "description": "Configuration options applied only in light mode"
+    },
+    "font-family": {
+      "type": "string",
+      "description": "The font families to use. Can be repeated for fallback fonts."
+    },
+    "font-family-bold": {
+      "type": "string",
+      "description": "Font family for bold text"
+    },
+    "font-family-italic": {
+      "type": "string",
+      "description": "Font family for italic text"
+    },
+    "font-family-bold-italic": {
+      "type": "string",
+      "description": "Font family for bold italic text"
+    },
+    "font-style": {
+      "type": "string",
+      "default": "default",
+      "description": "The named font style to use. Can be set to 'false' to disable."
+    },
+    "font-style-bold": {
+      "type": "string",
+      "default": "default",
+      "description": "Font style for bold text"
+    },
+    "font-style-italic": {
+      "type": "string",
+      "default": "default",
+      "description": "Font style for italic text"
+    },
+    "font-style-bold-italic": {
+      "type": "string",
+      "default": "default",
+      "description": "Font style for bold italic text"
+    },
+    "font-synthetic-style": {
+      "type": "string",
+      "default": "bold,italic,bold-italic",
+      "description": "Control whether Ghostty should synthesize styles. Values: true, false, no-bold, no-italic, no-bold-italic (comma-separated)"
+    },
+    "font-feature": {
+      "type": "string",
+      "description": "Font features to enable/disable. E.g., '-calt' to disable ligatures."
+    },
+    "font-size": {
+      "type": "number",
+      "default": 13,
+      "description": "Font size in points"
+    },
+    "font-variation": {
+      "type": "string",
+      "description": "Font variation settings for variable fonts. Format: id=value (e.g., wght=400)"
+    },
+    "font-variation-bold": {
+      "type": "string",
+      "description": "Font variation settings for bold"
+    },
+    "font-variation-italic": {
+      "type": "string",
+      "description": "Font variation settings for italic"
+    },
+    "font-variation-bold-italic": {
+      "type": "string",
+      "description": "Font variation settings for bold italic"
+    },
+    "font-codepoint-map": {
+      "type": "string",
+      "description": "Map Unicode codepoints to specific fonts. Format: U+XXXX=fontname"
+    },
+    "font-thicken": {
+      "type": "boolean",
+      "default": false,
+      "description": "Draw fonts with a thicker stroke (macOS only)"
+    },
+    "font-thicken-strength": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255,
+      "default": 255,
+      "description": "Strength of font thickening (0-255, macOS only)"
+    },
+    "font-shaping-break": {
+      "type": "string",
+      "default": "cursor",
+      "description": "Locations to break font shaping. Values: cursor, no-cursor"
+    },
+    "alpha-blending": {
+      "type": "string",
+      "enum": ["native", "linear", "linear-corrected"],
+      "default": "native",
+      "description": "Color space for alpha blending"
+    },
+    "adjust-cell-width": {
+      "type": "string",
+      "description": "Adjustment for cell width (integer or percentage)"
+    },
+    "adjust-cell-height": {
+      "type": "string",
+      "description": "Adjustment for cell height (integer or percentage)"
+    },
+    "adjust-font-baseline": {
+      "type": "string",
+      "description": "Adjustment for font baseline position"
+    },
+    "adjust-underline-position": {
+      "type": "string",
+      "description": "Adjustment for underline position"
+    },
+    "adjust-underline-thickness": {
+      "type": "string",
+      "description": "Adjustment for underline thickness"
+    },
+    "adjust-strikethrough-position": {
+      "type": "string",
+      "description": "Adjustment for strikethrough position"
+    },
+    "adjust-strikethrough-thickness": {
+      "type": "string",
+      "description": "Adjustment for strikethrough thickness"
+    },
+    "adjust-overline-position": {
+      "type": "string",
+      "description": "Adjustment for overline position"
+    },
+    "adjust-overline-thickness": {
+      "type": "string",
+      "description": "Adjustment for overline thickness"
+    },
+    "adjust-cursor-thickness": {
+      "type": "string",
+      "description": "Adjustment for cursor thickness"
+    },
+    "adjust-cursor-height": {
+      "type": "string",
+      "description": "Adjustment for cursor height"
+    },
+    "adjust-box-thickness": {
+      "type": "string",
+      "description": "Adjustment for box drawing character thickness"
+    },
+    "adjust-icon-height": {
+      "type": "string",
+      "description": "Adjustment for nerd font icon height"
+    },
+    "grapheme-width-method": {
+      "type": "string",
+      "enum": ["legacy", "unicode"],
+      "default": "unicode",
+      "description": "Method for calculating grapheme cluster width"
+    },
+    "freetype-load-flags": {
+      "type": "string",
+      "default": "hinting,no-force-autohint,no-monochrome,autohint",
+      "description": "FreeType load flags (Linux only)"
+    },
+    "theme": {
+      "type": "string",
+      "description": "Theme name or path. Supports light:name,dark:name syntax."
+    },
+    "background": {
+      "type": "string",
+      "description": "Background color (hex #RRGGBB or X11 color name)"
+    },
+    "foreground": {
+      "type": "string",
+      "description": "Foreground color (hex #RRGGBB or X11 color name)"
+    },
+    "background-image": {
+      "type": "string",
+      "description": "Path to background image (PNG or JPEG)"
+    },
+    "background-image-opacity": {
+      "type": "number",
+      "default": 1,
+      "description": "Opacity of background image (0.0-1.0+)"
+    },
+    "background-image-position": {
+      "type": "string",
+      "enum": ["top-left", "top-center", "top-right", "center-left", "center", "center-right", "bottom-left", "bottom-center", "bottom-right"],
+      "default": "center",
+      "description": "Position of background image"
+    },
+    "background-image-fit": {
+      "type": "string",
+      "enum": ["contain", "cover", "stretch", "none"],
+      "default": "contain",
+      "description": "How to fit the background image"
+    },
+    "background-image-repeat": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to repeat the background image"
+    },
+    "selection-foreground": {
+      "type": "string",
+      "description": "Selection foreground color"
+    },
+    "selection-background": {
+      "type": "string",
+      "description": "Selection background color"
+    },
+    "selection-clear-on-typing": {
+      "type": "boolean",
+      "default": true,
+      "description": "Clear selection when typing"
+    },
+    "selection-clear-on-copy": {
+      "type": "boolean",
+      "default": false,
+      "description": "Clear selection after copying"
+    },
+    "minimum-contrast": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 21,
+      "default": 1,
+      "description": "Minimum contrast ratio between foreground and background"
+    },
+    "palette": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Color palette entries. Format: N=#RRGGBB"
+    },
+    "cursor-color": {
+      "type": "string",
+      "description": "Cursor color (hex, X11 name, cell-foreground, or cell-background)"
+    },
+    "cursor-opacity": {
+      "type": "number",
+      "default": 1,
+      "description": "Cursor opacity (0.0-1.0)"
+    },
+    "cursor-style": {
+      "type": "string",
+      "enum": ["block", "bar", "underline", "block_hollow"],
+      "default": "block",
+      "description": "Cursor style"
+    },
+    "cursor-style-blink": {
+      "type": ["boolean", "null"],
+      "description": "Whether cursor blinks. Null respects DEC Mode 12."
+    },
+    "cursor-text": {
+      "type": "string",
+      "description": "Color of text under cursor"
+    },
+    "cursor-click-to-move": {
+      "type": "boolean",
+      "default": true,
+      "description": "Allow alt/option+click to move cursor at prompts"
+    },
+    "mouse-hide-while-typing": {
+      "type": "boolean",
+      "default": false,
+      "description": "Hide mouse cursor while typing"
+    },
+    "scroll-to-bottom": {
+      "type": "string",
+      "default": "keystroke,no-output",
+      "description": "When to scroll to bottom. Values: keystroke, output (comma-separated)"
+    },
+    "mouse-shift-capture": {
+      "type": ["boolean", "string"],
+      "enum": [true, false, "always", "never"],
+      "default": false,
+      "description": "Whether programs can detect shift+click"
+    },
+    "mouse-scroll-multiplier": {
+      "type": "string",
+      "default": "precision:1,discrete:3",
+      "description": "Scroll multiplier. Can use precision: and discrete: prefixes."
+    },
+    "background-opacity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "default": 1,
+      "description": "Background opacity (0.0-1.0)"
+    },
+    "background-opacity-cells": {
+      "type": "boolean",
+      "default": false,
+      "description": "Apply background opacity to cells with explicit background"
+    },
+    "background-blur": {
+      "type": ["boolean", "integer"],
+      "default": false,
+      "description": "Blur background. True uses intensity 20, or specify integer."
+    },
+    "unfocused-split-opacity": {
+      "type": "number",
+      "minimum": 0.15,
+      "maximum": 1,
+      "default": 0.7,
+      "description": "Opacity of unfocused splits"
+    },
+    "unfocused-split-fill": {
+      "type": "string",
+      "description": "Color to dim unfocused splits"
+    },
+    "split-divider-color": {
+      "type": "string",
+      "description": "Color of split dividers"
+    },
+    "command": {
+      "type": "string",
+      "description": "Command to run (usually a shell)"
+    },
+    "initial-command": {
+      "type": "string",
+      "description": "Command for first terminal surface only"
+    },
+    "env": {
+      "type": "string",
+      "description": "Extra environment variables. Format: KEY=VALUE"
+    },
+    "input": {
+      "type": "string",
+      "description": "Data to send as input on startup. Formats: raw:string or path:filepath"
+    },
+    "wait-after-command": {
+      "type": "boolean",
+      "default": false,
+      "description": "Keep terminal open after command exits"
+    },
+    "abnormal-command-exit-runtime": {
+      "type": "integer",
+      "default": 250,
+      "description": "Milliseconds below which process exit is abnormal"
+    },
+    "scrollback-limit": {
+      "type": "integer",
+      "default": 10000000,
+      "description": "Scrollback buffer size in bytes"
+    },
+    "link-url": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable URL matching and opening"
+    },
+    "link-previews": {
+      "type": ["boolean", "string"],
+      "enum": [true, false, "osc8"],
+      "default": true,
+      "description": "Show link previews"
+    },
+    "maximize": {
+      "type": "boolean",
+      "default": false,
+      "description": "Start windows maximized"
+    },
+    "fullscreen": {
+      "type": "boolean",
+      "default": false,
+      "description": "Start windows in fullscreen"
+    },
+    "title": {
+      "type": "string",
+      "description": "Fixed window title"
+    },
+    "class": {
+      "type": "string",
+      "description": "Application class (GTK only)"
+    },
+    "x11-instance-name": {
+      "type": "string",
+      "description": "X11 instance name (GTK only)"
+    },
+    "working-directory": {
+      "type": "string",
+      "description": "Initial working directory. Values: inherit, home, or absolute path"
+    },
+    "keybind": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Key bindings. Format: trigger=action"
+    },
+    "window-padding-x": {
+      "type": ["integer", "string"],
+      "default": 2,
+      "description": "Horizontal window padding in points. Can be 'left,right'."
+    },
+    "window-padding-y": {
+      "type": ["integer", "string"],
+      "default": 2,
+      "description": "Vertical window padding in points. Can be 'top,bottom'."
+    },
+    "window-padding-balance": {
+      "type": "boolean",
+      "default": false,
+      "description": "Automatically balance extra padding"
+    },
+    "window-padding-color": {
+      "type": "string",
+      "enum": ["background", "extend", "extend-always"],
+      "default": "background",
+      "description": "Color of window padding area"
+    },
+    "window-vsync": {
+      "type": "boolean",
+      "default": true,
+      "description": "Synchronize rendering with screen refresh (macOS only)"
+    },
+    "window-inherit-working-directory": {
+      "type": "boolean",
+      "default": true,
+      "description": "New windows inherit working directory"
+    },
+    "window-inherit-font-size": {
+      "type": "boolean",
+      "default": true,
+      "description": "New windows inherit font size"
+    },
+    "window-decoration": {
+      "type": ["boolean", "string"],
+      "enum": [true, false, "none", "auto", "client", "server"],
+      "default": "auto",
+      "description": "Window decoration preference"
+    },
+    "window-title-font-family": {
+      "type": "string",
+      "description": "Font for window and tab titles (GTK only)"
+    },
+    "window-subtitle": {
+      "type": ["boolean", "string"],
+      "enum": [false, "working-directory"],
+      "default": false,
+      "description": "Window subtitle content (GTK only)"
+    },
+    "window-theme": {
+      "type": "string",
+      "enum": ["auto", "system", "light", "dark", "ghostty"],
+      "default": "auto",
+      "description": "Window theme"
+    },
+    "window-colorspace": {
+      "type": "string",
+      "enum": ["srgb", "display-p3"],
+      "default": "srgb",
+      "description": "Color space for terminal colors (macOS only)"
+    },
+    "window-height": {
+      "type": "integer",
+      "default": 0,
+      "description": "Initial window height in cells"
+    },
+    "window-width": {
+      "type": "integer",
+      "default": 0,
+      "description": "Initial window width in cells"
+    },
+    "window-position-x": {
+      "type": "integer",
+      "description": "Initial window X position in pixels (macOS only)"
+    },
+    "window-position-y": {
+      "type": "integer",
+      "description": "Initial window Y position in pixels (macOS only)"
+    },
+    "window-save-state": {
+      "type": "string",
+      "enum": ["default", "never", "always"],
+      "default": "default",
+      "description": "Window state persistence (macOS only)"
+    },
+    "window-step-resize": {
+      "type": "boolean",
+      "default": false,
+      "description": "Resize in cell-size increments (macOS only)"
+    },
+    "window-new-tab-position": {
+      "type": "string",
+      "enum": ["current", "end"],
+      "default": "current",
+      "description": "Where new tabs are created"
+    },
+    "window-show-tab-bar": {
+      "type": "string",
+      "enum": ["always", "auto", "never"],
+      "default": "auto",
+      "description": "When to show tab bar (GTK only)"
+    },
+    "window-titlebar-background": {
+      "type": "string",
+      "description": "Titlebar background color (GTK only, window-theme=ghostty)"
+    },
+    "window-titlebar-foreground": {
+      "type": "string",
+      "description": "Titlebar foreground color (GTK only, window-theme=ghostty)"
+    },
+    "resize-overlay": {
+      "type": "string",
+      "enum": ["always", "never", "after-first"],
+      "default": "after-first",
+      "description": "When to show resize overlay"
+    },
+    "resize-overlay-position": {
+      "type": "string",
+      "enum": ["center", "top-left", "top-center", "top-right", "bottom-left", "bottom-center", "bottom-right"],
+      "default": "center",
+      "description": "Position of resize overlay"
+    },
+    "resize-overlay-duration": {
+      "type": "string",
+      "default": "750ms",
+      "description": "Duration to show resize overlay"
+    },
+    "focus-follows-mouse": {
+      "type": "boolean",
+      "default": false,
+      "description": "Mouse focus follows mouse in split panes"
+    },
+    "clipboard-read": {
+      "type": "string",
+      "enum": ["ask", "allow", "deny"],
+      "default": "ask",
+      "description": "Allow programs to read clipboard"
+    },
+    "clipboard-write": {
+      "type": "string",
+      "enum": ["ask", "allow", "deny"],
+      "default": "allow",
+      "description": "Allow programs to write clipboard"
+    },
+    "clipboard-trim-trailing-spaces": {
+      "type": "boolean",
+      "default": true,
+      "description": "Trim trailing whitespace when copying"
+    },
+    "clipboard-paste-protection": {
+      "type": "boolean",
+      "default": true,
+      "description": "Confirm before pasting unsafe text"
+    },
+    "clipboard-paste-bracketed-safe": {
+      "type": "boolean",
+      "default": true,
+      "description": "Consider bracketed pastes safe"
+    },
+    "title-report": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable title reporting (CSI 21 t) - security risk"
+    },
+    "image-storage-limit": {
+      "type": "integer",
+      "default": 320000000,
+      "description": "Max bytes for image data per screen"
+    },
+    "copy-on-select": {
+      "type": ["boolean", "string"],
+      "enum": [true, false, "clipboard"],
+      "default": true,
+      "description": "Auto-copy selected text"
+    },
+    "right-click-action": {
+      "type": "string",
+      "enum": ["context-menu", "paste", "copy", "copy-or-paste", "ignore"],
+      "default": "context-menu",
+      "description": "Action on right-click"
+    },
+    "click-repeat-interval": {
+      "type": "integer",
+      "default": 0,
+      "description": "Milliseconds between clicks for repeat detection"
+    },
+    "config-file": {
+      "type": "string",
+      "description": "Additional config files to load"
+    },
+    "config-default-files": {
+      "type": "boolean",
+      "default": true,
+      "description": "Load default config file paths (CLI only)"
+    },
+    "confirm-close-surface": {
+      "type": ["boolean", "string"],
+      "enum": [true, false, "always"],
+      "default": true,
+      "description": "Confirm before closing surface"
+    },
+    "quit-after-last-window-closed": {
+      "type": "boolean",
+      "description": "Quit after last window closes. Default: false on macOS, true on Linux"
+    },
+    "quit-after-last-window-closed-delay": {
+      "type": "string",
+      "description": "Delay before quitting after last window (Linux only)"
+    },
+    "initial-window": {
+      "type": "boolean",
+      "default": true,
+      "description": "Create initial window on launch"
+    },
+    "undo-timeout": {
+      "type": "string",
+      "default": "5s",
+      "description": "Duration undo operations remain available (macOS only)"
+    },
+    "quick-terminal-position": {
+      "type": "string",
+      "enum": ["top", "bottom", "left", "right", "center"],
+      "default": "top",
+      "description": "Quick terminal position"
+    },
+    "quick-terminal-screen": {
+      "type": "string",
+      "enum": ["main", "mouse", "macos-menu-bar"],
+      "default": "main",
+      "description": "Screen for quick terminal (macOS only)"
+    },
+    "quick-terminal-animation-duration": {
+      "type": "number",
+      "default": 0.2,
+      "description": "Quick terminal animation duration in seconds (macOS only)"
+    },
+    "quick-terminal-autohide": {
+      "type": "boolean",
+      "description": "Hide quick terminal on focus loss"
+    },
+    "quick-terminal-space-behavior": {
+      "type": "string",
+      "enum": ["move", "remain"],
+      "default": "move",
+      "description": "Quick terminal behavior on space switch (macOS only)"
+    },
+    "quick-terminal-keyboard-interactivity": {
+      "type": "string",
+      "enum": ["none", "on-demand", "exclusive"],
+      "default": "on-demand",
+      "description": "Keyboard input behavior for quick terminal (Linux Wayland only)"
+    },
+    "shell-integration": {
+      "type": "string",
+      "enum": ["none", "detect", "bash", "elvish", "fish", "zsh"],
+      "default": "detect",
+      "description": "Shell integration method"
+    },
+    "shell-integration-features": {
+      "type": "string",
+      "default": "cursor,no-sudo,title,no-ssh-env,no-ssh-terminfo,path",
+      "description": "Shell integration features to enable"
+    },
+    "osc-color-report-format": {
+      "type": "string",
+      "enum": ["none", "8-bit", "16-bit"],
+      "default": "16-bit",
+      "description": "Format for OSC color queries"
+    },
+    "vt-kam-allowed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Allow KAM mode (ANSI mode 2)"
+    },
+    "custom-shader": {
+      "type": "string",
+      "description": "Path to custom GLSL shader file"
+    },
+    "custom-shader-animation": {
+      "type": ["boolean", "string"],
+      "enum": [true, false, "always"],
+      "default": true,
+      "description": "Run shader animation loop"
+    },
+    "bell-features": {
+      "type": "string",
+      "default": "no-system,no-audio,attention,title,no-border",
+      "description": "Bell features to enable"
+    },
+    "bell-audio-path": {
+      "type": "string",
+      "description": "Path to bell audio file (GTK only)"
+    },
+    "bell-audio-volume": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "default": 0.5,
+      "description": "Bell audio volume (GTK only)"
+    },
+    "app-notifications": {
+      "type": "string",
+      "default": "clipboard-copy,config-reload",
+      "description": "In-app notifications to show (GTK only)"
+    },
+    "macos-non-native-fullscreen": {
+      "type": ["boolean", "string"],
+      "enum": [true, false, "visible-menu", "padded-notch"],
+      "default": false,
+      "description": "Use non-native fullscreen on macOS"
+    },
+    "macos-window-buttons": {
+      "type": "string",
+      "enum": ["visible", "hidden"],
+      "default": "visible",
+      "description": "macOS window button visibility"
+    },
+    "macos-titlebar-style": {
+      "type": "string",
+      "enum": ["native", "transparent", "tabs", "hidden"],
+      "default": "transparent",
+      "description": "macOS titlebar style"
+    },
+    "macos-titlebar-proxy-icon": {
+      "type": "string",
+      "enum": ["visible", "hidden"],
+      "default": "visible",
+      "description": "macOS titlebar proxy icon visibility"
+    },
+    "macos-dock-drop-behavior": {
+      "type": "string",
+      "enum": ["new-tab", "window"],
+      "default": "new-tab",
+      "description": "Behavior when dropping files on dock icon"
+    },
+    "macos-option-as-alt": {
+      "type": ["boolean", "string"],
+      "enum": [true, false, "left", "right"],
+      "description": "Treat Option key as Alt"
+    },
+    "macos-window-shadow": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable macOS window shadow"
+    },
+    "macos-hidden": {
+      "type": "string",
+      "enum": ["never", "always"],
+      "default": "never",
+      "description": "Hide macOS app from dock/switcher"
+    },
+    "macos-auto-secure-input": {
+      "type": "boolean",
+      "default": true,
+      "description": "Auto-enable secure input at password prompts"
+    },
+    "macos-secure-input-indication": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show indication when secure input is enabled"
+    },
+    "macos-icon": {
+      "type": "string",
+      "enum": ["official", "blueprint", "chalkboard", "microchip", "glass", "holographic", "paper", "retro", "xray", "custom", "custom-style"],
+      "default": "official",
+      "description": "macOS dock icon style"
+    },
+    "macos-custom-icon": {
+      "type": "string",
+      "description": "Path to custom icon file"
+    },
+    "macos-icon-frame": {
+      "type": "string",
+      "enum": ["aluminum", "beige", "plastic", "chrome"],
+      "default": "aluminum",
+      "description": "macOS icon frame material"
+    },
+    "macos-icon-ghost-color": {
+      "type": "string",
+      "description": "Ghost color in custom-style icon"
+    },
+    "macos-icon-screen-color": {
+      "type": "string",
+      "description": "Screen color(s) in custom-style icon (gradient)"
+    },
+    "macos-shortcuts": {
+      "type": "string",
+      "enum": ["ask", "allow", "deny"],
+      "default": "ask",
+      "description": "Allow macOS Shortcuts to control Ghostty"
+    },
+    "linux-cgroup": {
+      "type": "string",
+      "enum": ["never", "always", "single-instance"],
+      "default": "never",
+      "description": "Linux cgroup usage"
+    },
+    "linux-cgroup-memory-limit": {
+      "type": "integer",
+      "description": "Memory limit per terminal in bytes"
+    },
+    "linux-cgroup-processes-limit": {
+      "type": "integer",
+      "description": "Process limit per terminal"
+    },
+    "linux-cgroup-hard-fail": {
+      "type": "boolean",
+      "default": false,
+      "description": "Fail if cgroup initialization fails"
+    },
+    "gtk-opengl-debug": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable GTK OpenGL debugging"
+    },
+    "gtk-single-instance": {
+      "type": ["boolean", "string"],
+      "enum": [true, false, "detect"],
+      "default": "detect",
+      "description": "Run in single-instance mode"
+    },
+    "gtk-titlebar": {
+      "type": "boolean",
+      "default": true,
+      "description": "Display full GTK titlebar"
+    },
+    "gtk-tabs-location": {
+      "type": "string",
+      "enum": ["top", "bottom", "hidden"],
+      "default": "top",
+      "description": "GTK tab bar location"
+    },
+    "gtk-titlebar-hide-when-maximized": {
+      "type": "boolean",
+      "default": false,
+      "description": "Hide titlebar when maximized"
+    },
+    "gtk-toolbar-style": {
+      "type": "string",
+      "enum": ["flat", "raised", "raised-border"],
+      "default": "raised",
+      "description": "GTK toolbar appearance"
+    },
+    "gtk-titlebar-style": {
+      "type": "string",
+      "enum": ["native", "tabs"],
+      "default": "native",
+      "description": "GTK titlebar style"
+    },
+    "gtk-wide-tabs": {
+      "type": "boolean",
+      "default": true,
+      "description": "Use wide tabs (fill available space)"
+    },
+    "gtk-custom-css": {
+      "type": "string",
+      "description": "Path to custom CSS file"
+    },
+    "gtk-quick-terminal-layer": {
+      "type": "string",
+      "enum": ["overlay", "top", "bottom", "background"],
+      "default": "top",
+      "description": "Quick terminal window layer (GTK Wayland only)"
+    },
+    "gtk-quick-terminal-namespace": {
+      "type": "string",
+      "default": "ghostty-quick-terminal",
+      "description": "Quick terminal namespace (GTK Wayland only)"
+    },
+    "desktop-notifications": {
+      "type": "boolean",
+      "default": true,
+      "description": "Allow desktop notifications via escape sequences"
+    },
+    "bold-color": {
+      "type": "string",
+      "description": "Color for bold text. Can be 'bright' or a specific color."
+    },
+    "faint-opacity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "default": 0.5,
+      "description": "Opacity of faint text"
+    },
+    "term": {
+      "type": "string",
+      "default": "xterm-ghostty",
+      "description": "TERM environment variable value"
+    },
+    "enquiry-response": {
+      "type": "string",
+      "description": "Response to ENQ (0x05) character"
+    },
+    "async-backend": {
+      "type": "string",
+      "enum": ["auto", "epoll", "io_uring"],
+      "default": "auto",
+      "description": "Async IO backend (Linux only)"
+    },
+    "auto-update": {
+      "type": "string",
+      "enum": ["off", "check", "download"],
+      "description": "Auto-update behavior (macOS only)"
+    },
+    "auto-update-channel": {
+      "type": "string",
+      "enum": ["stable", "tip"],
+      "description": "Auto-update release channel (macOS only)"
+    }
+  },
+  "definitions": {
+    "themeConfig": {
+      "type": "object",
+      "description": "Theme-specific configuration (applied in dark or light mode)",
+      "properties": {
+        "theme": {
+          "type": "string",
+          "description": "Theme name"
+        },
+        "background": {
+          "type": "string",
+          "description": "Background color"
+        },
+        "foreground": {
+          "type": "string",
+          "description": "Foreground color"
+        },
+        "background-image": {
+          "type": "string",
+          "description": "Path to background image"
+        },
+        "background-image-opacity": {
+          "type": "number",
+          "description": "Background image opacity"
+        },
+        "background-image-position": {
+          "type": "string",
+          "enum": ["top-left", "top-center", "top-right", "center-left", "center", "center-right", "bottom-left", "bottom-center", "bottom-right"],
+          "description": "Background image position"
+        },
+        "background-image-fit": {
+          "type": "string",
+          "enum": ["contain", "cover", "stretch", "none"],
+          "description": "Background image fit mode"
+        },
+        "background-image-repeat": {
+          "type": "boolean",
+          "description": "Repeat background image"
+        },
+        "background-opacity": {
+          "type": "number",
+          "description": "Background opacity"
+        },
+        "cursor-color": {
+          "type": "string",
+          "description": "Cursor color"
+        },
+        "cursor-text": {
+          "type": "string",
+          "description": "Text color under cursor"
+        },
+        "selection-foreground": {
+          "type": "string",
+          "description": "Selection foreground color"
+        },
+        "selection-background": {
+          "type": "string",
+          "description": "Selection background color"
+        },
+        "palette": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Color palette entries"
+        },
+        "bold-color": {
+          "type": "string",
+          "description": "Bold text color"
+        },
+        "window-theme": {
+          "type": "string",
+          "enum": ["auto", "system", "light", "dark", "ghostty"],
+          "description": "Window theme"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
