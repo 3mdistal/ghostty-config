@@ -12,6 +12,7 @@
     <key>WatchPaths</key>
     <array>
         <string>/Users/alicemoore/Library/Preferences/.GlobalPreferences.plist</string>
+        <string>/Users/alicemoore/Developer/ghostty-config/config.json</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
