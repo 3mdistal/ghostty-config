@@ -1,14 +1,18 @@
 {
   "$schema": "./schema.json",
-  "font-size": 16,
+  "font-size": 18,
   "window-theme": "auto",
   "dark": {
-    "theme": "Broadcast",
-    "background-image": "/Users/alicemoore/Downloads/ghostty-background.jpg",
+    "theme": "Catppuccin Mocha",
+    "background-image": "/Users/alicemoore/Developer/ghostty-config/assets/ghostty-dark.jpg",
     "background-image-fit": "cover",
     "background-image-opacity": 0.15
   },
   "light": {
-    "theme": "Belafonte Day"
-  }
+    "theme": "Catppuccin Latte",
+    "background-image": "/Users/alicemoore/Developer/ghostty-config/assets/ghostty-light.jpg",
+    "background-image-fit": "cover",
+    "background-image-opacity": 0.2
+  },
+  "font-family": "NovaMono"
 }
